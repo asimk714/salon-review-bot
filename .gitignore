@@ -1,3 +1,16 @@
+# Secrets and local environment
+.env
+.env.local
+.env.*.local
+
+# Supabase local development (contains local credentials)
+supabase/.env
+
+# IDE
+.vscode/*
+.idea
+.DS_Store
+
 # Logs
 logs
 *.log
@@ -7,16 +20,12 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
 dist
 dist-ssr
-*.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
+# Editor
 *.suo
 *.ntvs*
 *.njsproj

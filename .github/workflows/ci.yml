@@ -1,0 +1,61 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deterministic:
+    name: Deterministic checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Prompt evaluator
+        run: npx tsx tests/regression/evaluator.ts
+
+      - name: Output evaluator
+        run: npx tsx tests/regression/output-evaluator.ts
+
+      - name: Component tests
+        run: npm test
+        continue-on-error: true
+
+  live:
+    name: Live AI regression
+    runs-on: ubuntu-latest
+    if: ${{ vars.LOVABLE_API_KEY != '' || secrets.LOVABLE_API_KEY != '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Live runner
+        env:
+          LOVABLE_API_KEY: ${{ vars.LOVABLE_API_KEY || secrets.LOVABLE_API_KEY }}
+        run: npx tsx tests/regression/live-runner.ts
+
+      - name: Fixture evaluator
+        run: npx tsx tests/regression/run-fixture-evaluator.ts
