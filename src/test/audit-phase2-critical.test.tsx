@@ -120,10 +120,7 @@ describe("Audit Phase 2 — critical checks", () => {
       expect(
         screen.getByRole("img", { name: /1 out of 5 stars/i })
       ).toBeInTheDocument();
-      const txt = screen
-        .getByText("Short Review", { selector: "card" })
-        .getByText(/The color faded/)
-        .textContent;
+      const txt = screen.getByText(/The color faded/).textContent;
       expect(txt).not.toContain("wonderful");
       expect(txt).not.toContain("amazing");
       expect(txt).not.toContain("best in");

@@ -241,10 +241,7 @@ describe("ResultsScreen — honesty and UI", () => {
     });
     expect(starDisplay).toBeInTheDocument();
 
-    const shortText = screen
-      .getByText("Short Review", { selector: "card" })
-      .getByText(/The color faded/)
-      .textContent;
+    const shortText = screen.getByText(/The color faded/).textContent;
     expect(shortText).not.toContain("wonderful");
     expect(shortText).not.toContain("amazing");
     expect(shortText).not.toContain("best in");
