@@ -7,7 +7,14 @@
 
 export interface TestCase {
   id: string;
-  input: Record<string, string | number>;
+  input: {
+    rating: number;
+    visitType: string;
+    stoodOut: string;
+    tellOthers: string;
+    staffName: string;
+    context: string;
+  };
   expect: {
     ratingPreserved: boolean;
     sentimentMustMatch: "positive" | "mixed" | "negative" | "disappointed";

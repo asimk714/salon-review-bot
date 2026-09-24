@@ -111,7 +111,7 @@ const ReviewForm = ({ onSubmit, isLoading }: ReviewFormProps) => {
     onSubmit(form);
   };
 
-  const renderSelect = (label: string, field: keyof FormData, options: string[]) => (
+  const renderSelect = (label: string, field: "visitType", options: string[]) => (
     <div className="space-y-1.5">
       <Label className="text-sm font-medium text-foreground">{label} *</Label>
       <Select
